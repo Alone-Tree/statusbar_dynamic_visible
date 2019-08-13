@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="group_approval_management" model="ir.module.category">
+        <field name="name">Approval Management</field>
+        <field name="sequence">120</field>
+    </record>
+
+    <record id="group_approval_manger" model="res.groups">
+        <field name="name">Approval Manager</field>
+        <field name="category_id" ref="group_approval_management"/>
+        <field name="approval_manger" eval="[(4, ref('base.group_user'))]"/>
+        <field name="users" eval="[(4, ref('base.user_admin'))]"/>
+    </record>
+</odoo>
