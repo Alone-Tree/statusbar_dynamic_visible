@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="approval_tree_view" model="ir.ui.view">
+        <field name="name">approval.tree</field>
+        <field name="model">approval</field>
+        <field name="arch" type="xml">
+            <tree string="Approval">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="title"/>
+                <field name="summary"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="approval_form_view" model="ir.ui.view">
+            <field name="name">approval.form</field>
+            <field name="model">approval</field>
+            <field name="arch" type="xml">
+                <form string="Approval">
+                    <header>
+                        <button name="button_submit" string="提交" type="object" />
+                        <button name="button_set_draft" string="设置草稿" type="object" />
+                        <button name="button_captain_approval" string="组长审批" type="object" />
+                        <button name="button_manager_approval" string="经理审批" type="object" />
+                        <button name="button_boss_approval" string="老板审批" type="object" />
+                        <button name="button_reject" string="驳回" type="object" />
+                        <button name="button_agree" string="同意" type="object" />
+                        <field name="state" widget="statusbar" readonly="1"
+                               statusbar_visible="draft,submit,dynamic_state"
+                               dynamic_visible="captain_approval,manager_approval,boss_approval,reject,agree"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="title"/>
+                        </group>
+                        <group>
+                            <field name="summary"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    <record id="approval_action" model="ir.actions.act_window">
+        <field name="name">Approval</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">approval</field>
+        <field name="view_mode">kanban,tree,form,activity</field>
+        <field name="view_type">form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new approval
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="approval_root"
+              name="approval"
+              sequence="101"/>
+
+    <menuitem id="approval_management"
+              name="Approval Management"
+              parent="approval_root"
+              sequence="120"
+              action="approval_action"/>
+
+</odoo>
